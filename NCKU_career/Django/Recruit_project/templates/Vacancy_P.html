@@ -1,0 +1,702 @@
+{% load static %}
+
+{% include 'header.html' %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}" media="all">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/checkbox.css' %}" media="all">
+    <script type="text/javascript" src="{% static 'input-filestyle/bootstrap-filestyle.min.js' %}"></script>
+
+</head>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    $('#send').click(function(){
+        
+        var company_name_C = "{{ company_name_C }}";
+        var account = "{{ account }}";
+
+        var vacancies = document.getElementById("vacancies").value;
+        var work_place = document.getElementById("work_place").value;
+        var work_time = document.getElementById("work_time").value;
+        var treatment = document.getElementById("treatment").value; 
+        var number_of_people = document.getElementById("select").value;
+        var wrok_content = document.getElementById("wrok_content").value;
+
+        var file_name1 = "{{ file_name1 }}";
+        var file_name2 = "{{ file_name2 }}";
+        var file_name3 = "{{ file_name3 }}";
+
+        var unit = document.getElementById("unit").value; 
+        var fill_in = document.getElementById("fill_in").value; 
+        var job_title = document.getElementById("job_title").value; 
+        var tel = document.getElementById("tel").value;
+        var email = document.getElementById("email").value; 
+        var unit_post = document.getElementById("unit_post").checked; 
+
+        var publish_date_start = document.getElementById("publish_date_start").value; 
+        var publish_date_end = document.getElementById("publish_date_end").value; 
+
+        $.ajax({
+            url:"{% url 'Vacancy_P' %}",
+            data :  {
+                company_name_C,
+                account,
+
+                vacancies,
+                work_place,
+                work_time,
+                treatment,
+                number_of_people,
+                wrok_content,
+
+                file_name1,
+                file_name2,
+                file_name3,
+
+                unit,
+                fill_in,
+                job_title,
+                tel,
+                email,
+                unit_post,
+                
+                publish_date_start,
+                publish_date_end,
+
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            type:'POST',
+
+            datatype : 'text',
+
+                                
+            success:function(data){
+                $('#output').html(data);
+                
+                $('#table_genome_genes').DataTable();
+                window.location.href = "{% url 'Vacancy_M' %}?company_name_C="+company_name_C+"&account="+account;
+            },
+                                        
+            beforeSend:function(){
+
+                $.blockUI({ css: { 
+                            width : '25%',
+                            border: 'none', 
+                            padding: '15px', 
+                            backgroundColor: '#000', 
+                            '-webkit-border-radius': '10px', 
+                            '-moz-border-radius': '10px', 
+                            opacity: .5, 
+                            color: '#fff'
+                            }
+                         });
+            },
+
+            complete:function(){
+                $.unblockUI();
+            },        
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError);
+            }       
+        });                                                                                                           
+    });
+
+    $("#uploads1").click(function(){
+
+        var company_name_C = "{{ company_name_C }}";
+        var account = "{{ account }}";
+
+        var vacancies = document.getElementById("vacancies").value;
+        var work_place = document.getElementById("work_place").value;
+        var work_time = document.getElementById("work_time").value;
+        var treatment = document.getElementById("treatment").value;
+        var number_of_people = document.getElementById("select").value;
+        var wrok_content = document.getElementById("wrok_content").value;
+
+        var file_name1 = document.getElementById("file_name1").innerHTML;
+        var file_name2 = document.getElementById("file_name2").innerHTML;
+        var file_name3 = document.getElementById("file_name3").innerHTML;
+
+        var unit = document.getElementById("unit").value;
+        var fill_in = document.getElementById("fill_in").value;
+        var job_title = document.getElementById("job_title").value;
+        var tel = document.getElementById("tel").value;
+        var email = document.getElementById("email").value;
+        var publish_date_start = document.getElementById("publish_date_start").value;
+        var publish_date_end = document.getElementById("publish_date_end").value;
+
+        $.ajax({
+            url:"{% url 'keep_post_value' %}",
+            data :  {
+                company_name_C,
+                account,
+
+                vacancies,
+                work_place,
+                work_time,
+                treatment,
+                number_of_people,
+                wrok_content,
+
+                file_name1,
+                file_name2,
+                file_name3,
+                unit,
+                fill_in,
+                job_title,
+                tel,
+                email,
+                publish_date_start,
+                publish_date_end,
+
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            type:'POST',
+
+            datatype : 'text',
+
+                                
+            success:function(data){
+                var company_name_C = "{{ company_name_C }}";
+                window.location.href = "{% url 'upload_post1' %}?company_name_C=" + company_name_C;
+            },
+                                        
+            beforeSend:function(){
+
+            },
+
+            complete:function(){
+
+            },        
+            error:function(xhr, ajaxOptions, thrownError){ 
+                // alert(xhr.status); 
+                // alert(thrownError);
+            }       
+        });                                                                                                           
+    });
+
+    $("#uploads2").click(function(){
+
+        var company_name_C = "{{ company_name_C }}";
+        var account = "{{ account }}";
+
+        var vacancies = document.getElementById("vacancies").value;
+        var work_place = document.getElementById("work_place").value;
+        var work_time = document.getElementById("work_time").value;
+        var treatment = document.getElementById("treatment").value;
+        var number_of_people = document.getElementById("select").value;
+        var wrok_content = document.getElementById("wrok_content").value;
+
+        var file_name1 = document.getElementById("file_name1").innerHTML;
+        var file_name2 = document.getElementById("file_name2").innerHTML;
+        var file_name3 = document.getElementById("file_name3").innerHTML;
+
+        var unit = document.getElementById("unit").value;
+        var fill_in = document.getElementById("fill_in").value;
+        var job_title = document.getElementById("job_title").value;
+        var tel = document.getElementById("tel").value;
+        var email = document.getElementById("email").value;
+        var publish_date_start = document.getElementById("publish_date_start").value;
+        var publish_date_end = document.getElementById("publish_date_end").value;
+
+        $.ajax({
+            url:"{% url 'keep_post_value' %}",
+            data :  {
+                company_name_C,
+                account,
+
+                vacancies,
+                work_place,
+                work_time,
+                treatment,
+                number_of_people,
+                wrok_content,
+
+                file_name1,
+                file_name2,
+                file_name3,
+                unit,
+                fill_in,
+                job_title,
+                tel,
+                email,
+                publish_date_start,
+                publish_date_end,
+
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            type:'POST',
+
+            datatype : 'text',
+
+                                
+            success:function(data){
+                var company_name_C = "{{ company_name_C }}";
+                window.location.href = "{% url 'upload_post2' %}?company_name_C=" + company_name_C;
+            },
+                                        
+            beforeSend:function(){
+
+            },
+
+            complete:function(){
+
+            },        
+            error:function(xhr, ajaxOptions, thrownError){ 
+                // alert(xhr.status); 
+                // alert(thrownError);
+            }       
+        });                                                                                                           
+    });
+
+    $("#uploads3").click(function(){
+
+        var company_name_C = "{{ company_name_C }}";
+        var account = "{{ account }}";
+
+        var vacancies = document.getElementById("vacancies").value;
+        var work_place = document.getElementById("work_place").value;
+        var work_time = document.getElementById("work_time").value;
+        var treatment = document.getElementById("treatment").value;
+        var number_of_people = document.getElementById("select").value;
+        var wrok_content = document.getElementById("wrok_content").value;
+
+        var file_name1 = document.getElementById("file_name1").innerHTML;
+        var file_name2 = document.getElementById("file_name2").innerHTML;
+        var file_name3 = document.getElementById("file_name3").innerHTML;
+
+        var unit = document.getElementById("unit").value;
+        var fill_in = document.getElementById("fill_in").value;
+        var job_title = document.getElementById("job_title").value;
+        var tel = document.getElementById("tel").value;
+        var email = document.getElementById("email").value;
+        var publish_date_start = document.getElementById("publish_date_start").value;
+        var publish_date_end = document.getElementById("publish_date_end").value;
+
+        $.ajax({
+            url:"{% url 'keep_post_value' %}",
+            data :  {
+                company_name_C,
+                account,
+
+                vacancies,
+                work_place,
+                work_time,
+                treatment,
+                number_of_people,
+                wrok_content,
+
+                file_name1,
+                file_name2,
+                file_name3,
+                unit,
+                fill_in,
+                job_title,
+                tel,
+                email,
+                publish_date_start,
+                publish_date_end,
+
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            type:'POST',
+
+            datatype : 'text',
+
+                                
+            success:function(data){
+                var company_name_C = "{{ company_name_C }}";
+                window.location.href = "{% url 'upload_post3' %}?company_name_C=" + company_name_C;
+            },
+                                        
+            beforeSend:function(){
+
+            },
+
+            complete:function(){
+
+            },        
+            error:function(xhr, ajaxOptions, thrownError){ 
+                // alert(xhr.status); 
+                // alert(thrownError);
+            }       
+        });                                                                                                           
+    });
+
+    $("#select").select2({
+        placeholder: "Select a number",
+        allowClear: true
+    });
+
+    var dateToday = new Date(); 
+    $('#publish_date_start').datepicker({
+        dateFormat: 'yy/mm/dd',
+        numberOfMonths: 2,
+        minDate: dateToday
+    });
+
+    $('#publish_date_end').datepicker({
+        dateFormat: 'yy/mm/dd',
+        numberOfMonths: 2,
+        minDate: dateToday
+    });
+
+
+    $('#pre_send').click(function(){
+        $(".modal-body #empty_text").text("");
+        var vacancies = document.getElementById("vacancies").value;
+        var work_place = document.getElementById("work_place").value;
+        var work_time = document.getElementById("work_time").value;
+        var treatment = document.getElementById("treatment").value; 
+        var number_of_people = document.getElementById("select").value;
+        var wrok_content = document.getElementById("wrok_content").value;
+
+        var unit = document.getElementById("unit").value; 
+        var email = document.getElementById("email").value; 
+
+        var publish_date_start = document.getElementById("publish_date_start").value; 
+        var publish_date_end = document.getElementById("publish_date_end").value; 
+
+        var value_array = [vacancies,work_place,work_time,treatment,number_of_people,wrok_content,unit,email,publish_date_start,publish_date_end]
+        var id_array = ['vacancies','work_place','work_time','treatment','number_of_people','wrok_content','unit','email','publish_date_start','publish_date_end']
+        if(value_array.indexOf("") > -1){//資料填寫不完整
+            $(".modal-body #empty_text").append("以下資料尚未填寫!<br><br>");
+            for (i = 0; i < value_array.length; i++) { 
+                if(value_array[i] == ""){
+                    empty_text = document.getElementById(id_array[i]+"_label").textContent;
+                    $(".modal-body #empty_text").append(empty_text+"<br>");
+                }
+            }
+            $("#empty").modal('show');
+        }
+        else{
+            $("#confirm").modal('show');
+        }
+        
+    })
+});
+</script>
+
+<div id="id_content">
+    <div id = "middle">
+        <div width=100% align="center">
+        {% if vacancy_P_POST %}
+            {{ vacancy_P_POST }}
+        {% endif %}
+            <div id="Sidebar_middle">
+	            <ul class="nav nav-tabs">
+                    <li>
+                        <a href="{% url 'Vacancy_P' %}" style="background-color:#fcfcfc;border-top:2px solid #1982b8;font-weight:bold;">刊登職缺</a>
+                    </li>
+ 
+	            </ul>
+	            <form class="form-horizontal SearchForm">
+	                <br><br>
+
+    	            <ul class="nav nav-tabs" style="padding-left: 70px;">
+	                	<li role="presentation" class="active"><a style="background-color:#fcfcfc;border-bottom:2px solid #B22222;font-weight:bold;box-shadow:5px 5px 8px 2px #ccc;">JOB</a></li>
+	            	</ul><br>
+				 	<div class='FormOption'>
+                        <div class="form-group">
+	                            
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="vacancies_label">* 職缺項目 : </label>
+
+                            <div class="col-sm-6">
+                                {% if vacancies %}
+                                    <input type="text" class="form-control" placeholder="" id="vacancies" value="{{ vacancies }}">
+                                {% else %}
+                                    <input type="text" class="form-control" placeholder="" id="vacancies">
+                                {% endif %}    	
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="work_place_label">* 工作地點 : </label>
+
+                            <div class="col-sm-6">
+                                {% if work_place %}
+                                    <input type="text" class="form-control" placeholder="" id="work_place" value="{{ work_place }}">
+                                {% else %}
+                                    <input type="text" class="form-control" placeholder="" id="work_place">
+                                {% endif %} 
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="work_time_label">* 工作時間 : </label>
+
+                            <div class="col-sm-6">
+                                {% if work_time %}
+                                    <input type="text" class="form-control" placeholder="" id="work_time" value="{{ work_time }}">
+                                {% else %}
+                                    <input type="text" class="form-control" placeholder="" id="work_time">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="treatment_label">* 工作待遇 : </label>
+
+                            <div class="col-sm-6">
+                                {% if treatment %}
+                                    <input type="text" class="form-control" placeholder="" id="treatment" value="{{ treatment }}">
+                                {% else %}
+                                    <input type="text" class="form-control" placeholder="" id="treatment">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="number_of_people_label">* 需求人數 : </label>
+
+                            <div class="col-sm-6">
+						      	<select class="form-control" id = 'select' style='width: 100%'>
+                                    {% if number_of_people %}
+                                        <option value="{{ number_of_people }}" selected>{{ number_of_people }}</option>
+                                    {% else %}
+                                        <option></option>
+                                        <option value='1'>1</option>
+                                        <option value='2'>2</option>
+                                        <option value='3'>3</option>
+                                        <option value='4'>4</option>
+                                        <option value='5'>5</option>
+                                        <option value='6'>6</option>
+                                        <option value='7'>7</option>
+                                        <option value='8'>8</option>
+                                        <option value='9'>9</option>
+                                        <option value='10'>10</option>
+                                        
+                                    {% endif %}
+                                    {% for i in option_range %}
+                                        {% if i != number_of_people %}
+                                            <option value="{{ i }}">{{ i }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="wrok_content_label">* 工作內容 :<br>(含應徵方式)</label>
+
+                            <div class="col-sm-6">
+                                {% if wrok_content %}
+                                    <textarea class="form-control" style="height:200px;" id="wrok_content">{{ wrok_content }}</textarea>
+                                {% else %}
+                                   <textarea class="form-control" style="height:200px;" id="wrok_content"></textarea>
+                                {% endif %} 
+                            </div><br>
+                        </div>
+                    </div><br>
+
+                    <ul class="nav nav-tabs" style="padding-left: 70px;">
+                        <li role="presentation" class="active"><a style="background-color:#fcfcfc;border-bottom:2px solid #B22222;font-weight:bold;box-shadow:5px 5px 8px 2px #ccc;">File</a></li>
+                    </ul><br>
+                    <div class='FormOption'>
+                        <div class="form-group">
+                                
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="file_name1_label">附檔1 : </label>
+
+                            <div class="col-sm-6">
+                                <a><button type="button" class="btn btn-primary" id='uploads1'>上傳</button></a>
+                            </div><br><br>
+                            
+                            <label for="inputPassword3" class="col-sm-3 control-label"></label>
+                            <div class="col-sm-6" id="file_name1">
+                                {% if file_name1 %}
+                                    {{ file_name1 }}
+                                {% endif %}    
+                            </div>
+                            <br><br>
+
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="file_name2_label">附檔2 : </label>
+
+                            <div class="col-sm-6">
+                                <a><button type="button" class="btn btn-primary" id='uploads2'>上傳</button></a>
+                            </div><br><br>
+                            
+                            <label for="inputPassword3" class="col-sm-3 control-label"></label>
+                            <div class="col-sm-6" id="file_name2">
+                                {% if file_name2 %}
+                                    {{ file_name2 }}
+                                {% endif %}  
+                            </div>
+                            <br><br>
+
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="file_name3_label">附檔3 : </label>
+
+                            <div class="col-sm-6">
+                                <a><button type="button" class="btn btn-primary" id='uploads3'>上傳</button></a>
+                            </div><br><br>
+                            
+                            <label for="inputPassword3" class="col-sm-3 control-label"></label>
+                            <div class="col-sm-6" id="file_name3">
+                                {% if file_name3 %}
+                                    {{ file_name3 }}
+                                {% endif %}
+                            </div>
+                            <br><br>
+
+                        </div>
+                    </div><br>
+
+                    <ul class="nav nav-tabs" style="padding-left: 70px;">
+                        <li role="presentation" class="active"><a style="background-color:#fcfcfc;border-bottom:2px solid #B22222;font-weight:bold;box-shadow:5px 5px 8px 2px #ccc;">Unit</a></li>
+                    </ul><br>
+                    <div class='FormOption'>
+                        <div class="form-group">
+                                
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="unit_label">* 填寫單位 : </label>
+
+                            <div class="col-sm-6">
+                                {% if unit %}
+                                    <input type="text" class="form-control" placeholder="" id="unit" value="{{ unit }}">
+                                {% else %}
+                                    <input type="text" class="form-control" placeholder="" id="unit">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="fill_in_label">填寫人 : </label>
+
+                            <div class="col-sm-6">
+                                {% if fill_in %}
+                                    <input type="text" class="form-control" placeholder="" id="fill_in" value="{{ fill_in }}">
+                                {% else %}
+                                    <input type="text" class="form-control" placeholder="" id="fill_in">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="job_title_label">職稱 : </label>
+
+                            <div class="col-sm-6">
+                                {% if job_title %}
+                                    <input type="text" class="form-control" placeholder="" id="job_title" value="{{ job_title }}">
+                                {% else %}
+                                    <input type="text" class="form-control" placeholder="" id="job_title">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="tel_label">連絡電話 : </label>
+
+                            <div class="col-sm-6">
+                                {% if tel %}
+                                    <input type="text" class="form-control" placeholder="" id="tel" value="{{ tel }}">
+                                {% else %}
+                                    <input type="text" class="form-control" placeholder="" id="tel">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="email_label">* Email : </label>
+
+                            <div class="col-sm-6">
+                                {% if email %}
+                                    <input type="text" class="form-control" placeholder="" id="email" value="{{ email }}">
+                                {% else %}
+                                    <input type="text" class="form-control" placeholder="" id="email">
+                                {% endif %}
+                            </div><br><br>
+                            <label for="inputPassword3" class="col-sm-3 control-label"><input id="unit_post" type="checkbox" checked></label>
+                            <div class="col-sm-6">
+                                將此欄資訊公布在職缺列表
+                            </div><br><br>
+                        </div>
+                    </div><br>
+
+                    <ul class="nav nav-tabs" style="padding-left: 70px;">
+                        <li role="presentation" class="active"><a style="background-color:#fcfcfc;border-bottom:2px solid #B22222;font-weight:bold;box-shadow:5px 5px 8px 2px #ccc;">Unit</a></li>
+                    </ul><br>
+                    <div class='FormOption'>
+                        <div class="form-group">
+                                
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="publish_date_start_label">* 刊登日期(起) : </label>
+
+                            <div class="col-sm-6">
+                                {% if publish_date_start %}
+                                    <div class="input-group">
+                                        <input type='text' class="form-control" id="publish_date_start" value="{{ publish_date_start }}">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                        </span>
+                                    </div>
+                                {% else %}
+                                    <div class="input-group">
+                                        <input type='text' class="form-control" id="publish_date_start" value="{{ publish_date_start }}">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label" id="publish_date_end_label">* 刊登日期(迄) : </label>
+
+                            <div class="col-sm-6">
+                                {% if publish_date_end %}
+                                    <div class="input-group">
+                                        <input type='text' class="form-control" id="publish_date_end" value="{{ publish_date_end }}">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                        </span>
+                                    </div>
+                                {% else %}
+                                    <div class="input-group">
+                                        <input type='text' class="form-control" id="publish_date_end" value="{{ publish_date_end }}">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </div><br><br>
+                        </div>
+                    </div><br>
+                    
+                    <button type ='button' value = 'search' id = "pre_send" class="btn btn-primary">進行刊登</button>
+                    <a href="{% url 'Vacancy_M' %}?company_name_C={{ company_name_C }}&account={{ account }}"><button type ='button' class="btn btn-primary">取消刊登</button></a><br><br>
+
+
+                    <div class="modal fade" id="confirm" role="dialog">
+                        <div class="modal-dialog">
+                        
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">請確認!</h4>
+                                </div>
+                            <div class="modal-body">
+                                <p>請確認資料正確!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" id="send">確認</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                            </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="empty" role="dialog">
+                        <div class="modal-dialog">
+                        
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">錯誤!</h4>
+                                </div>
+                            <div class="modal-body">
+                                <p id="empty_text"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                            </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+	            </form><br>
+           	</div>
+        </div>
+
+        <div id = 'output'>
+        </div>
+    </div>
+</div><br>
+
+
+{% include 'footer.html' %}

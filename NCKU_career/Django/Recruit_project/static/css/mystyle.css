@@ -1,0 +1,114 @@
+
+/*div*/
+html,body {height: 100%; margin: 0;padding: 0;/*background-color:#F7F6F2;*/font-family: verdana;font-size:100%;line-height: 25px;color:#4d4d4d}
+#headermiddle{width:100%;margin-left:auto;margin-right:auto;background-color: #F7F6F2;}
+#middle{width:100%;min-height:27.5%;margin-left:auto;margin-right:auto;/*background-color: #F7F6F2;*/  /*border-right:1px Gainsboro  solid;border-left:1px Gainsboro solid;*/padding:1px;}/*overflow:auto; ¶W¥X­¶­±®É*//*min-height:95%ÀH­¶­±ÅÜ*/
+#divleft{width:14%;height:100%;float:left;background-color: #E6E6FA;}
+#divright{width:14%;height:100%;float:right;background-color: #E6E6FA;}
+#footermiddle{width:100%;margin-left:auto;margin-right:auto;background-color: #FFF;/* border-right:1px Gainsboro  solid;border-left:1px Gainsboro solid;*/}
+#divfooter{width:100%;height:50px;line-height:50px;text-align:center;color: #999;font-size:12px;background-color: #4d4d4d;position:relative;bottom:0px;z-index:0;}/*z-index:0; 下一層*/
+
+/*---------------------------網頁header content footer架構----------------------------*/
+
+/*templates*//*https://yichen0831.wordpress.com/2013/08/19/html%E5%B0%87footer%E7%BD%AE%E5%BA%95%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8css/*/
+#id_wrapper {
+    /* 設定高度最小為100%, 如果內容區塊很多, 可以長大 */
+    min-height: 100%;
+    /* 位置設為relative, 作為footer區塊位置的參考 */
+    position: relative;
+}
+
+#id_header {
+    /* 設定header的高度 */
+    height: 160px;
+}
+
+#id_content {
+    /* 留出header及footer區塊的空間 */
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#id_footer {
+    /* 設定footer的高度 */
+    height: 60px;
+    /* 設定footer絕對位置在底部 */
+    position: absolute;
+    bottom: 0;
+    /* 展開footer寬度 */
+    width: 100%;
+    line-height:30px;
+    text-align:center;color: #999;font-size:16px;background-color: #4d4d4d;z-index:0;
+    box-shadow:inset 0 2px 0 rgba(255,255,255,.15), 0 2px 5px rgba(0,0,0,.075);border:1px solid transparent;
+}
+
+/*---------------------------左右排版----------------------------*/
+#Sidebar_left {
+    width:60%;
+    float:left;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#Sidebar_right {
+    width:40%;
+    float:left;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#Sidebar_middle{
+    width:80%;
+}
+
+/*---------------------------form表單----------------------------*/
+.SearchForm{
+    border:1px solid #ddd;
+    border-radius: 4px;
+    background-color:#fcfcfc;
+    box-shadow:5px 5px 8px 2px #ccc;
+
+}
+.FormOption{
+    width:90%;
+    box-shadow:inset 0 2px 0 rgba(255,255,255,.15), 0 2px 5px rgba(0,0,0,.075);
+    border:1px solid #ddd;
+    border-radius: 4px;
+    background-color:#FFF;
+    margin: auto;
+    /*width: 50%;*/
+    margin: 0 auto;
+
+}
+
+/*---------------------------捲動表格-------------------*/
+
+.table-scroll {
+    height: 445px;
+    width: 100%;
+}
+.table-scroll thead {
+    width: 100%;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.table-scroll tbody {
+    height: 90%;
+    overflow-y: auto;
+    width: 100%;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.table-scroll thead, .table-scroll tbody, .table-scroll tr, .table-scroll td, .table-scroll th {
+    display: block;
+}
+.table-scroll tbody td, .table-scroll thead > tr> th {
+    float: left;
+    border-bottom-width: 0;
+}
+
+
+.div-scroll {
+    position:relative;
+    overflow:auto;
+    height:350px;
+
+}

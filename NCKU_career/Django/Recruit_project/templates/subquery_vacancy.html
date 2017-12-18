@@ -1,0 +1,38 @@
+<table id="vacancy_list">
+<thead>
+    <tr>
+        <th><input type="checkbox"></th>
+        <th>公司名稱</th>
+        <th>職稱項目</th>
+        <th>刊登日期 (起)</th>
+        <th>刊登日期 (迄)</th>
+        <th>查詢</th>
+    </tr>
+</thead>
+<tbody>
+    {% if result %}
+        {% for row in result %}
+            {% if row.19 == 'true' %}
+                <tr style="background-color:#90EE90">
+                    <td style="padding:10px 18px;"><input type="checkbox"></td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td>{{ row.17 }}</td>
+                    <td>{{ row.18 }}</td>
+                    <td><a href="{% url 'Vacancy_edit_page_admin' %}?company_name_C={{ row.1 }}&account={{ row.2 }}&vacancies={{ row.3 }}&publish_date_start={{ row.17 }}&publish_date_end={{ row.18  }}">查詢</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td style="padding:10px 18px;"><input type="checkbox"></td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td>{{ row.17 }}</td>
+                    <td>{{ row.18 }}</td>
+                    <td><a href="{% url 'Vacancy_edit_page_admin' %}?company_name_C={{ row.1 }}&account={{ row.2 }}&vacancies={{ row.3 }}&publish_date_start={{ row.17 }}&publish_date_end={{ row.18  }}">查詢</a></td>
+                </tr>
+            {% endif %}
+            
+        {% endfor %}  
+    {% endif %}
+</tbody>
+</table><br>
