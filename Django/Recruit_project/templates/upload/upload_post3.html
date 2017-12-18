@@ -1,0 +1,43 @@
+{% load static %}
+
+{% include 'header.html' %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}" media="all">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/checkbox.css' %}" media="all">
+    <script type="text/javascript" src="{% static 'input-filestyle/bootstrap-filestyle.min.js' %}"></script>
+
+    <!--覆蓋bootstrap scaffolding.less(html,body)-->
+</head>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#Upload').click(function(){
+            $('#loading').show()      
+        });
+    })
+
+    </script>
+    <body>
+        <div id="id_content">
+            <div id = "middle">
+                <div width=100% align="center">
+                    <!-- Upload form. Note enctype attribute! -->
+                    <form method="post" action="{% url 'upload_post3' %}?company_name_C={{ company_name_C }}" enctype="multipart/form-data" id='upload_form'>
+                        {% csrf_token %}
+                        <p>{{ form.non_field_errors }}</p>
+                        <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+                        <p>
+                            {{ form.docfile.errors }}
+                            {{ form.docfile }}
+                        </p>
+                        <p><input type="submit" value="Upload" id='Upload'/></p>
+                    </form>
+                    <img src="{% static '/images/loading2.gif' %}" style="display:none" id='loading'>
+                </div>
+            </div>
+        </div>
+        <div id='output'></div>
+    </body>
+</html>
+{% include 'footer.html' %}
