@@ -1,0 +1,859 @@
+{% load static %}
+
+{% include 'header.html' %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}" media="all">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/checkbox.css' %}" media="all">
+    <script type="text/javascript" src="{% static 'input-filestyle/bootstrap-filestyle.min.js' %}"></script>
+
+
+    <!--覆蓋bootstrap scaffolding.less(html,body)-->
+</head>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$('#register_edit').click(function(){
+        
+      	var company_name_C = document.getElementById("company_name_C").value;
+        var company_name_E = document.getElementById("company_name_E").value;
+        var principal = document.getElementById("principal").value;
+        var uniform_numbers = document.getElementById("uniform_numbers").value;
+        var URL = document.getElementById("URL").value;
+        var address = document.getElementById("address").value;
+
+        var unit = document.getElementById("unit").value;
+        var fill_in = document.getElementById("fill_in").value;
+        var job_title = document.getElementById("job_title").value;
+        var tel = document.getElementById("tel").value;
+        var email = document.getElementById("email").value;
+
+        var account = document.getElementById("account").value;
+        var password = document.getElementById("password").value;
+        var checkbox1 = document.getElementById("checkbox1").checked;
+        var upload = "{{ result.14 }}"
+
+        $.ajax({
+            url:"{% url 'register_edit' %}",
+            data :  {
+                company_name_C,
+		        company_name_E,
+		        principal,
+		        uniform_numbers,
+		        URL,
+		        address,
+
+		        unit,
+		        fill_in,
+		        job_title,
+		        tel,
+		        email,
+
+		        account,
+		        password,
+		        checkbox1,
+		        upload,
+
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            type:'POST',
+
+            datatype : 'text',
+
+                                
+            success:function(data){
+                // $('#output').html(data);
+                // $("#modal_edit_success").modal('show');
+                var new_company_name_C = data
+                window.location.href = "{% url 'Company_info' %}?company_name_C="+new_company_name_C+"&date={{ result.16 }}&account={{ result.11 }}";
+
+            },
+                                        
+            beforeSend:function(){
+
+                $.blockUI({ css: { 
+                            width : '25%',
+                            border: 'none', 
+                            padding: '15px', 
+                            backgroundColor: '#000', 
+                            '-webkit-border-radius': '10px', 
+                            '-moz-border-radius': '10px', 
+                            opacity: .5, 
+                            color: '#fff'
+                            }
+                         });
+            },
+
+            complete:function(){
+                $.unblockUI();
+            },        
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError);
+            }       
+        });                                                                                                           
+    });
+
+    $('#review_success').click(function(){
+        
+        var company_name_C = "{{ result.0 }}";
+
+        var account = "{{ result.11 }}";
+        var password = "{{ result.12 }}";
+
+        $.ajax({
+            url:"{% url 'review_success' %}",
+            data :  {
+                company_name_C,
+                account,
+                password,
+
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            type:'POST',
+
+            datatype : 'text',
+
+                                
+            success:function(data){
+                $('#output').html(data);
+                $("#modal_success").modal('show');
+
+            },
+                                        
+            beforeSend:function(){
+
+                $.blockUI({ css: { 
+                            width : '25%',
+                            border: 'none', 
+                            padding: '15px', 
+                            backgroundColor: '#000', 
+                            '-webkit-border-radius': '10px', 
+                            '-moz-border-radius': '10px', 
+                            opacity: .5, 
+                            color: '#fff'
+                            }
+                         });
+            },
+
+            complete:function(){
+                $.unblockUI();
+            },        
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError);
+            }       
+        });                                                                                                           
+    });
+
+    $('#review_fail').click(function(){
+        
+        var company_name_C = "{{ result.0 }}";
+
+        var account = "{{ result.11 }}";
+        var password = "{{ result.12 }}";
+
+        $.ajax({
+            url:"{% url 'review_fail' %}",
+            data :  {
+                company_name_C,
+                account,
+                password,
+
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            type:'POST',
+
+            datatype : 'text',
+
+                                
+            success:function(data){
+                $('#output').html(data);
+                $("#modal_fail").modal('show');
+
+                
+                $('#table_genome_genes').DataTable();
+
+            },
+                                        
+            beforeSend:function(){
+
+                $.blockUI({ css: { 
+                            width : '25%',
+                            border: 'none', 
+                            padding: '15px', 
+                            backgroundColor: '#000', 
+                            '-webkit-border-radius': '10px', 
+                            '-moz-border-radius': '10px', 
+                            opacity: .5, 
+                            color: '#fff'
+                            }
+                         });
+            },
+
+            complete:function(){
+                $.unblockUI();
+            },        
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError);
+            }       
+        });                                                                                                           
+    });
+
+    $('#uploadlink').click(function(){
+        
+        var company_name_C = document.getElementById("company_name_C").value;
+        var company_name_E = document.getElementById("company_name_E").value;
+        var principal = document.getElementById("principal").value;
+        var uniform_numbers = document.getElementById("uniform_numbers").value;
+        var URL = document.getElementById("URL").value;
+        var address = document.getElementById("address").value;
+
+        var unit = document.getElementById("unit").value;
+        var fill_in = document.getElementById("fill_in").value;
+        var job_title = document.getElementById("job_title").value;
+        var tel = document.getElementById("tel").value;
+        var email = document.getElementById("email").value;
+
+        var account = document.getElementById("account").value;
+        var password = document.getElementById("password").value;
+        var checkbox1 = document.getElementById("checkbox1").checked;
+
+        $.ajax({
+            url:"{% url 'keep_register_value' %}",
+            data :  {
+                company_name_C,
+                company_name_E,
+                principal,
+                uniform_numbers,
+                URL,
+                address,
+
+                unit,
+                fill_in,
+                job_title,
+                tel,
+                email,
+
+                account,
+                password,
+                checkbox1,
+
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            type:'POST',
+
+            datatype : 'text',
+
+                                
+            success:function(data){
+                var company_name_E = document.getElementById("company_name_E").value;
+                window.location.href = "{% url 'upload_register' %}?company_name_E=" + company_name_E;
+            },
+                                        
+            beforeSend:function(){
+
+            },
+
+            complete:function(){
+
+            },        
+            error:function(xhr, ajaxOptions, thrownError){ 
+                // alert(xhr.status); 
+                // alert(thrownError);
+            }       
+        });                                                                                                           
+    });
+
+    $('#passwd_edit').click(function(){
+        var new_password1 = document.getElementById("new_password1").value;
+        var new_password2 = document.getElementById("new_password2").value;
+
+        var company_name_C = document.getElementById("company_name_C").value;
+        var company_name_E = document.getElementById("company_name_E").value;
+
+        var account = document.getElementById("account").value;
+        var password = document.getElementById("password").value;
+
+        if(new_password1 == new_password2){
+
+            $.ajax({
+                url:"{% url 'passwd_edit' %}",
+                data :  {
+                    new_password1,
+                    new_password2,
+                    company_name_C,
+                    company_name_E,
+                    account,
+                    password,
+
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                type:'POST',
+
+                datatype : 'text',
+
+                                    
+                success:function(data){
+
+                    $("#modal_passwd_successed").modal('show');
+                    $("#modal_change_passwd").modal('hide');
+
+                },
+                                            
+                beforeSend:function(){
+
+                    $.blockUI({ css: { 
+                                width : '25%',
+                                border: 'none', 
+                                padding: '15px', 
+                                backgroundColor: '#000', 
+                                '-webkit-border-radius': '10px', 
+                                '-moz-border-radius': '10px', 
+                                opacity: .5, 
+                                color: '#fff'
+                                }
+                             });
+                },
+
+                complete:function(){
+                    $.unblockUI();
+                },        
+                error:function(xhr, ajaxOptions, thrownError){ 
+                    alert(xhr.status); 
+                    alert(thrownError);
+                }       
+            });   
+        }
+        else{
+            $("#modal_passwd_failed").modal('show');
+        }                                                                                                        
+    });
+
+    function checkbox_value(checkboxname){//數checkbox2[]有勾選幾個
+        var feature_value = new Array();
+        $("input:checkbox:checked[name='"+checkboxname+"']").each(function(i) { 
+            feature_value[i] = this.value; 
+        });
+        return feature_value;
+    }
+
+    if (performance.navigation.type == 1) {
+        var company_name_E = document.getElementById("company_name_E").value;
+        $.ajax({
+            url:"{% url 'remove_file' %}",
+            data :  {
+                company_name_E,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            type:'POST',
+
+            datatype : 'text',
+
+                                
+            success:function(data){
+
+            },
+                                        
+            beforeSend:function(){
+
+            },
+
+            complete:function(){
+            },        
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError);
+            }       
+        }); 
+
+    }
+    else {
+        console.info("This page is not reloaded");
+    }
+
+    $('#review_success').click(function(){
+        
+        var company_name_C = "{{ result.0 }}";
+        var email = "{{ result.10 }}"
+
+        $.ajax({
+            url:"{% url 'sendmail_success_register' %}",
+            data :  {
+                company_name_C,
+                email,
+
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            type:'POST',
+
+            datatype : 'text',
+
+                                
+            success:function(data){
+
+            },
+                                        
+            beforeSend:function(){
+
+            },
+
+            complete:function(){
+
+            },        
+            error:function(xhr, ajaxOptions, thrownError){ 
+  
+            }       
+        });                                                                                                           
+    });
+
+    $('#review_success_pre').click(function(){
+    	$("#modal_success_confirm").modal('show');
+    })
+
+    $('#review_success').click(function(){
+    	$("#modal_success_confirm").modal('hide');
+    })
+
+    $('#review_fail_pre').click(function(){
+    	$("#modal_fail_confirm").modal('show');
+    })
+
+    $('#review_fail').click(function(){
+    	$("#modal_fail_confirm").modal('hide');
+    })
+
+    $('#register_edit_pre').click(function(){
+    	$("#modal_edit_confirm").modal('show');
+    })
+
+    $('#register_edit').click(function(){
+    	$("#modal_edit_confirm").modal('hide');
+    })
+
+    $('#norm_link').click(function(){
+        $("#norm_modal").modal('show');
+    })
+    $('#change_passwd').click(function(){
+        $("#modal_change_passwd").modal('show');
+    })
+});
+</script>
+
+<div id="id_content">
+    <div id = "middle">
+        <div width=100% align="center">
+            {% if notexists %}
+                {{ notexists }}
+            {% else %}   
+            {% endif %}
+            <div id="Sidebar_middle">
+	            <ul class="nav nav-tabs">
+	                <li><a style="background-color:#fcfcfc;border-top:2px solid #1982b8;font-weight:bold;">企業資料管理</a></li>
+	            </ul>
+	            <form class="form-horizontal SearchForm">
+	                <br><br>
+
+    	            <ul class="nav nav-tabs" style="padding-left: 70px;">
+	                	<li><a style="background-color:#fcfcfc;border-bottom:2px solid #B22222;font-weight:bold;box-shadow:5px 5px 8px 2px #ccc;">Company</a></li>
+	            	</ul><br>
+				 	<div class='FormOption'>
+                        <div class="form-group">
+	                            
+                            <label for="inputPassword3" class="col-sm-3 control-label">公司名稱 (中文) : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="company_name_C" type="text" class="form-control" placeholder="" value="{{ result.0 }}">
+                                {% endif %}
+						      	
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label">公司名稱 (英文) : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="company_name_E" type="text" class="form-control" placeholder="" value="{{ result.1 }}">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label">負責人 : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="principal" type="text" class="form-control" placeholder="" value="{{ result.2 }}">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label">統一編號 : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="uniform_numbers" type="text" class="form-control" placeholder="" value="{{ result.3 }}">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label">公司網址 : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="URL" type="text" class="form-control" placeholder="" value="{{ result.4 }}">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label">公司地址 : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="address" type="text" class="form-control" placeholder="" value="{{ result.5 }}">
+                                {% endif %}
+                            </div><br>
+                        </div>
+
+
+                    </div><br>
+
+                    <ul class="nav nav-tabs" style="padding-left: 70px;">
+	                	<li><a style="background-color:#fcfcfc;border-bottom:2px solid #B22222;font-weight:bold;box-shadow:5px 5px 8px 2px #ccc;">Unit</a></li>
+	            	</ul><br>
+				 	<div class='FormOption'>
+                        <div class="form-group">
+	                            
+                            <label for="inputPassword3" class="col-sm-3 control-label">填寫單位 : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="unit" type="text" class="form-control" placeholder="" value="{{ result.6 }}">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label">填寫人 : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="fill_in" type="text" class="form-control" placeholder="" value="{{ result.7 }}">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label">職稱 : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="job_title" type="text" class="form-control" placeholder="" value="{{ result.8 }}">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label">連絡電話 : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="tel" type="text" class="form-control" placeholder="" value="{{ result.9 }}">
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label">Email : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="email" type="text" class="form-control" placeholder="" value="{{ result.10 }}">
+                                {% endif %}
+                            </div><br>
+                        </div>
+                    </div><br>
+
+                    <ul class="nav nav-tabs" style="padding-left: 70px;">
+	                	<li><a style="background-color:#fcfcfc;border-bottom:2px solid #B22222;font-weight:bold;box-shadow:5px 5px 8px 2px #ccc;">File</a></li>
+	            	</ul><br>
+				 	<div class='FormOption'>
+                        <div class="form-group">
+	                            
+                            <label for="inputPassword3" class="col-sm-3 control-label">附檔 : </label>
+
+                            <div class="col-sm-6">
+                            <a href="{% url 'download' %}?folder=uploads&filename={{ result.14 }}"><button type="button" class="btn btn-primary">下載</button></a>
+                            </div><br><br>
+
+                            {% if result %}
+                                <label for="inputPassword3" class="col-sm-3 control-label"></label>
+                                <div class="col-sm-6">
+                                    {{ result.14 }}
+                                </div>
+                            {% endif %}
+
+                            
+                        </div>
+                    </div><br><br>
+
+                    <ul class="nav nav-tabs" style="padding-left: 70px;">
+	                	<li><a style="background-color:#fcfcfc;border-bottom:2px solid #B22222;font-weight:bold;box-shadow:5px 5px 8px 2px #ccc;">Account</a></li>
+	            	</ul><br>
+				 	<div class='FormOption'>
+                        <div class="form-group">
+	                            
+                            <label for="inputPassword3" class="col-sm-3 control-label">帳號 : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="account" type="text" class="form-control" placeholder="" value="{{ result.11 }}" disabled>
+                                {% endif %}
+                            </div><br><br>
+
+                            <label for="inputPassword3" class="col-sm-3 control-label">密碼 : </label>
+
+                            <div class="col-sm-6">
+                                {% if result %}
+                                    <input id="password" type="password" class="form-control" placeholder="" value="{{ result.12 }}" disabled>
+                                {% endif %}
+                            </div>
+                            <button type="button" class="btn btn-primary" id = 'change_passwd'>更改密碼</button><br>
+                            <div class="modal fade" id="modal_change_passwd" role="dialog">
+                                <div class="modal-dialog">
+                                  <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">更改密碼</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label for="inputPassword3" class="col-sm-3 control-label">輸入新密碼:</label>
+                                            <div class="col-sm-6"><input id="new_password1" type="password" class="form-control"></div><br><br>
+                                            <label for="inputPassword3" class="col-sm-3 control-label">再次確認密碼:</label>
+                                            <div class="col-sm-6"><input id="new_password2" type="password" class="form-control"></div><br><br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" id="passwd_edit">確認</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="modal_passwd_failed" role="dialog">
+                                <div class="modal-dialog">
+                                  <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">密碼錯誤</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>錯誤，請再次確認密碼!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="modal_passwd_successed" role="dialog">
+                                <div class="modal-dialog">
+                                  <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">密碼已更改</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>密碼更改成功!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{% url 'Company_review' %}?company_name_C={{ result.0 }}&date={{ result.16 }}&account={{ result.11 }}"><button type="button" class="btn btn-default">關閉</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+
+                    <ul class="nav nav-tabs" style="padding-left: 70px;">
+	                	<li><a style="background-color:#fcfcfc;border-bottom:2px solid #B22222;font-weight:bold;box-shadow:5px 5px 8px 2px #ccc;">Information</a></li>
+	            	</ul><br>
+				 	<div class='FormOption'>
+                        <div class="form-group">
+
+                        	<label for="inputPassword3" class="col-sm-3 control-label">
+                                {% if result.13 == 'true' %}
+                                    <input id="checkbox1" type="checkbox" checked disabled>
+                                {% else %}   
+                                    <input id="checkbox1" type="checkbox" disabled>
+                                {% endif %}
+                            </label>
+	                    	<div class="col-sm-4">
+                                本單位已閱讀了解並同意網站注意事項
+                            </div>
+                            <a id = "norm_link" style="cursor:pointer;">開啟網站使用注意事項</a><br><br>
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="col-sm-4">
+	                            審核狀態 : 
+	                            {% if result.15 == 'true' %}
+	                            	已審核
+	                            {% else %}
+	                            	待審核
+	                            {% endif %}
+                            </div>
+                        </div>
+                    </div><br>
+                    <button type ='button' id = "register_edit_pre" class="btn btn-primary">儲存/修改資料</button><br><br>
+
+                    <div class="modal fade" id="modal_edit_confirm" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">請再次確認!</h4>
+                                </div>
+                            <div class="modal-body">
+                                <p>儲存修改資料?</p>
+                            </div>
+                            <div class="modal-footer">
+                            	<button type="button" class="btn btn-default" id="register_edit">確認</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modal_edit_success" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">完成!</h4>
+                                </div>
+                            <div class="modal-body">
+                                <p>已儲存修改資料!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{% url 'Company_info_admin' %}"><button type="button" class="btn btn-default">關閉</button></a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type ='button' id = "review_success_pre" class="btn btn-primary">審核通過</button>
+                    <button type ='button' id = "review_fail_pre" class="btn btn-primary">刪除本筆</button><br><br>
+
+                    <div class="modal fade" id="modal_success_confirm" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">請再次確認!</h4>
+                                </div>
+                            <div class="modal-body">
+                                <p>確定通過此筆?</p>
+                            </div>
+                            <div class="modal-footer">
+                            	<button type="button" class="btn btn-default" id="review_success">通過</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                            </div>
+                        	</div>
+                    	</div>
+                    </div>
+                    <div class="modal fade" id="modal_success" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">審核成功!</h4>
+                                </div>
+                            <div class="modal-body">
+                                <p>已通過審核!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{% url 'Company_info_admin' %}"><button type="button" class="btn btn-default">關閉</button></a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modal_fail_confirm" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">請再次確認!</h4>
+                                </div>
+                            <div class="modal-body">
+                                <p>確定刪除此筆?</p>
+                            </div>
+                            <div class="modal-footer">
+                            	<button type="button" class="btn btn-default" id="review_fail">刪除</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modal_fail" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">刪除成功!</h4>
+                                </div>
+                            <div class="modal-body">
+                                <p>已刪除此筆!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{% url 'Company_info_admin' %}"><button type="button" class="btn btn-default">關閉</button></a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="norm_modal" role="dialog">
+                        <div class="modal-dialog">
+                        
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title"><b>成功大學企業求才刊登網站使用注意事項</b></h4>
+                                </div>
+                            <div class="modal-body" align="left">
+                                敬愛的企業先進 您好<br><br>
+                                歡迎使用成功大學企業求才訊息刊登網站，使用網站前，請詳讀以下內容，當貴公司勾選「同意」鍵送出申請時，即視同貴公司同意並遵守本網站使用注意事項:<br><br>
+
+                                一、求才單位刊登職缺皆應符合現行勞動相關法規之規範，如有違反請自行承擔所衍生之勞雇糾紛。<br><br>
+
+                                二、若求才單位已停業、歇業、解散、合併等情事，請將徵才資訊下架並與網站管理員聯繫。<br><br>
+
+                                三、求才單位不得冒用其他公司名義或私下接受他人請託以求才者名義為虛偽之刊登。<br><br>
+
+                                四、刊登徵才內容如涉及下列情況，本網站則有權停止刊登訊息內容<br>
+                                (1)   法定八大行業。<br>
+                                (2)   賭博情色行業。<br>
+                                (3)   利用本網站進行仲介或派遣方式向求職者收取費用者。<br>
+                                (4)   以徵才名義進行直銷買賣行為者。<br>
+                                (5)   其他經本組評估不適宜申請者。<br><br>
+
+                                五.網站所蒐集之資料於適當範圍內提供校內單位，製作校務資料之用途。<br><br>
+
+                                ※以上規範如有未盡事宜，以現行勞動就業及個資相關法規為準；本組得依網站運作情形，修改使用規定並公告週知。當求才單位申請使用本網站，經網站管理員審核通過，系統將會寄發通知信予求才單位，求才單位可逕自至本網站刊登職缺訊息。
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                            </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+	            </form><br>
+           	</div>
+        </div>
+
+        <div id = 'output'>
+        </div>
+    </div>
+</div><br>
+
+
+{% include 'footer.html' %}
